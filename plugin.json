@@ -1,0 +1,42 @@
+{
+  "name" : "proxymanager",
+  "version" : "latest",
+  "description" : "NGINX ProxyManager",
+  "author" : "Alvaro Luis Bustamante",
+  "license" : "MIT",
+  "repository" : {
+      "type" : "git",
+      "url" : "https://github.com/NginxProxyManager/nginx-proxy-manager.git"
+  },
+  "metadata" : {
+      "name" : "ProxyManager",
+      "description" : "ProxyManager",
+      "image" : "https://nginxproxymanager.com/icon.png",
+      "icon" : "https://nginxproxymanager.com/icon.png"
+  },
+  "task" : {
+      "type" : "docker",
+      "image" : "jc21/nginx-proxy-manager",
+      "user" : "0:0",
+      "volumes" : [
+          {
+              "source" : "data",
+              "target" : "/data",
+              "description": "Mount point for user data configuration."
+          },
+          {
+              "source" : "../../../../../letsencrypt",
+              "target" : "/letsencrypt",
+              "description": "Mount point for accessing certificates"
+          }
+      ]
+  },
+  "interface" : {
+      "main" : {
+          "proxy_to" : {
+              "plugin" : "proxymanager",
+              "port" : 81
+          }
+      }
+  }
+}
