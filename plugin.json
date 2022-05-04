@@ -35,7 +35,7 @@
       "main" : {
           "proxy_to" : {
               "plugin" : "proxymanager",
-              "port" : 3000
+              "port" : 81
           }
       }
   }
