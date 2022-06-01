@@ -1,4 +1,4 @@
-
+{
   "name" : "influxdb",
   "version" : "latest",
   "description" : "InfluxDB User Interface",
