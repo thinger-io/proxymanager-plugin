@@ -1,7 +1,7 @@
-{
-  "name" : "proxymanager",
+
+  "name" : "influxdb",
   "version" : "latest",
-  "description" : "NGINX ProxyManager",
+  "description" : "InfluxDB User Interface",
   "author" : "Alvaro Luis Bustamante",
   "license" : "MIT",
   "repository" : {
@@ -9,33 +9,31 @@
       "url" : "https://github.com/NginxProxyManager/nginx-proxy-manager.git"
   },
   "metadata" : {
-      "name" : "ProxyManager",
-      "description" : "ProxyManager",
-      "image" : "https://nginxproxymanager.com/icon.png",
-      "icon" : "https://nginxproxymanager.com/icon.png"
+      "name" : "InfluxDB",
+      "description" : "InfluxDB User Interface",
+      "image" : "https://www.influxdata.com/wp-content/uploads/cubo.svg",
+      "icon" : "https://www.influxdata.com/wp-content/uploads/cubo.svg"
   },
   "task" : {
       "type" : "docker",
-      "image" : "jc21/nginx-proxy-manager",
+      "image" : "nginx",
       "user" : "0:0",
       "volumes" : [
           {
               "source" : "data",
-              "target" : "/data",
+              "target" : "/etc/nginx/conf.d/",
               "description": "Mount point for user data configuration."
-          },
-          {
-              "source" : "../../../../../letsencrypt",
-              "target" : "/letsencrypt",
-              "description": "Mount point for accessing certificates"
           }
-      ]
+      ],
+      "copy": {
+        "config": "data"
+      }
   },
   "interface" : {
       "main" : {
           "proxy_to" : {
-              "plugin" : "proxymanager",
-              "port" : 81
+              "plugin" : "influxdb",
+              "port" : 80
           }
       }
   }
